@@ -30,7 +30,7 @@ class holeView(arcade.View):
         #setup clouds
         arcade.schedule(self.add_cloud, 3.0) #add a cloud every three seconds
         #setup clubs dictionary (your virtual golf bag! format "club name": club multiplier)
-        self.golfbag= {'driver': 2,'4-iron': 1.75,'7-iron': 1.5, '8-iron': 1.25, '9-iron': 1, 'chipping wedge': 0.75, 'putter': 0.5}
+        self.golfbag= {'driver': 1,'hybrid': 0.80, '4-wood': 0.85, '4-iron': 0.71, '5-iron': 0.67, '6-iron': 0.63, '7-iron': 0.60, '8-iron': 0.56, '9-iron': 0.52, 'pitching wedge': 0.46,'gap wedge': 0.38, 'sand wedge': 0.31, 'lob wedge': 0.25, 'putter': 0.1} #calc multipliers based on James' hit distances
         self.club = "driver" #start with the driver boom big shot wow
         self.club_multiplier = self.golfbag[self.club]
         #setup sprite lists
@@ -112,8 +112,24 @@ class holeView(arcade.View):
             self.club = "driver"
             self.club_multiplier = self.golfbag[self.club]
             arcade.play_sound(self.bagrustle)
+        elif symbol == arcade.key.H:
+            self.club = "hybrid"
+            self.club_multiplier = self.golfbag[self.club]
+            arcade.play_sound(self.bagrustle)
+        elif symbol == arcade.key.W:
+            self.club = "4-wood"
+            self.club_multiplier = self.golfbag[self.club]
+            arcade.play_sound(self.bagrustle)
         elif symbol == arcade.key.KEY_4:
             self.club = "4-iron"
+            arcade.play_sound(self.bagrustle)
+            self.club_multiplier = self.golfbag[self.club]
+        elif symbol == arcade.key.KEY_5:
+            self.club = "5-iron"
+            arcade.play_sound(self.bagrustle)
+            self.club_multiplier = self.golfbag[self.club]
+        elif symbol == arcade.key.KEY_6:
+            self.club = "6-iron"
             arcade.play_sound(self.bagrustle)
             self.club_multiplier = self.golfbag[self.club]
         elif symbol == arcade.key.KEY_7:
@@ -128,11 +144,23 @@ class holeView(arcade.View):
             self.club = "9-iron"
             arcade.play_sound(self.bagrustle)
             self.club_multiplier = self.golfbag[self.club]
-        elif symbol == arcade.key.C:
-            self.club = "chipping wedge"
+        elif symbol == arcade.key.P:
+            self.club = "pitching wedge"
             arcade.play_sound(self.bagrustle)
             self.club_multiplier = self.golfbag[self.club]
-        elif symbol == arcade.key.P:
+        elif symbol == arcade.key.G:
+            self.club = "gap wedge"
+            self.club_multiplier = self.golfbag[self.club]
+            arcade.play_sound(self.bagrustle)
+        elif symbol == arcade.key.S:
+            self.club = "sand wedge"
+            self.club_multiplier = self.golfbag[self.club]
+            arcade.play_sound(self.bagrustle)
+        elif symbol == arcade.key.L:
+            self.club = "lob wedge"
+            self.club_multiplier = self.golfbag[self.club]
+            arcade.play_sound(self.bagrustle)
+        elif symbol == arcade.key.U:
             self.club = "putter"
             arcade.play_sound(self.bagrustle)
             self.club_multiplier = self.golfbag[self.club]
@@ -362,7 +390,6 @@ def PGA():
     instructions_view = instuctionsView()
     window.show_view(instructions_view)
     arcade.run()
-    score = getattr(instructions_view,"score")
 
 #RUN MAIN
 PGA()
