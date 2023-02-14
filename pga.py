@@ -90,7 +90,7 @@ class holeView(arcade.View):
         self.ugly=arcade.load_sound("sound/ugly.wav")
         self.cold_one=arcade.load_sound("sound/cold_one.wav")
         #sound helpers
-        self.club_sound = {'driver': self.driver, '4-iron': self.iron, '7-iron': self.iron, '8-iron': self.iron, '9-iron': self.iron, 'chipping wedge': self.chipper, 'putter': self.putter}
+        self.club_sound = {'driver': self.driver, 'hybrid': self.iron, '4-wood': self.iron, '4-iron': self.iron, '5-iron': self.iron, '6-iron': self.iron, '7-iron': self.iron, '8-iron': self.iron, '9-iron': self.iron, 'pitching wedge': self.chipper, 'gap wedge': self.chipper, 'sand wedge': self.chipper, 'lob wedge': self.chipper, 'putter': self.putter}
         self.didweohno = 0
         self.didwewarnthem = 0
 
