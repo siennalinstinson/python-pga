@@ -1,4 +1,4 @@
-#to do: choices 9 or 18?, link par difficulty to n_bunkers/lakes, timer?, fairway? green? start and end screens, add bogey/par/etc, finish multipliers and club dictionaries
+#to do: choices 9 or 18, bogey/par/etc, funny sounds
 #--------------------------------------------------------------------------------------------------------
 #IMPORT LIBS
 import arcade
@@ -280,6 +280,8 @@ class holeView(arcade.View):
         arcade.draw_lrtb_rectangle_filled(0,width,height,height-50,arcade.color.SKY_BLUE)
         #draw grass
         arcade.draw_lrtb_rectangle_filled(0,width,height-50,0,arcade.color.GREEN)
+        #draw green
+        arcade.draw_circle_filled(self.hole.center_x, self.hole.center_y, 35, arcade.color.LAWN_GREEN)
         #draw all sprites
         self.all_sprites_list.draw()
         #update score
