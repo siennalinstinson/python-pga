@@ -85,7 +85,10 @@ class holeView(arcade.View):
         self.holeinsome=arcade.load_sound("sound/hole.wav")
         self.holeinone=arcade.load_sound("sound/holeinone.wav")
         self.gasp=arcade.load_sound("sound/gasp.wav")
-        self.ohno=arcade.load_sound("sound/ohno.wav")
+        self.not_good=arcade.load_sound("sound/not_good.wav")
+        self.f=arcade.load_sound("sound/f.wav")
+        self.ugly=arcade.load_sound("sound/ugly.wav")
+        self.cold_one=arcade.load_sound("sound/cold_one.wav")
         #sound helpers
         self.club_sound = {'driver': self.driver, '4-iron': self.iron, '7-iron': self.iron, '8-iron': self.iron, '9-iron': self.iron, 'chipping wedge': self.chipper, 'putter': self.putter}
         self.didweohno = 0
@@ -167,6 +170,8 @@ class holeView(arcade.View):
         #hit ball
         elif symbol == arcade.key.SPACE:
             self.backswing=time.time()
+        elif symbol == arcade.key.B:
+            arcade.play_sound(self.cold_one)
 
     def on_key_release(self, symbol: int, modifiers: int): #stop player commands
         #player stop moving
@@ -193,14 +198,17 @@ class holeView(arcade.View):
                 arcade.play_sound(self.holeinone)
             else:
                 arcade.play_sound(self.holecup)
-                arcade.play_sound(self.holeinsome) #you are the best golfer ever the crowd loves you wowwww <333
+                if (self.n_hits - self.n_par) >= 4: #quadruple bogey
+                    arcade.play_sound(self.not_good)
+                else:
+                    arcade.play_sound(self.holeinsome) #you are the best golfer ever the crowd loves you wowwww <333
             if self.n_hole == 18: #end
                 end_view = endView(self.score) #end screen
                 self.window.show_view(end_view)
             else: #setup hole
                 self.n_hole += 1 #increment hole
                 self.setup() #setup new hole
-        #update if still didn't make it ughhhhh BE BETTER
+        #update if didn't make it ughhhhh BE BETTER
         self.all_sprites_list.update()
         #ball checks
         #if ball is moving, decrease speed
@@ -220,7 +228,7 @@ class holeView(arcade.View):
         #check if ball lands in bunker, activate bunker multiplier
         if arcade.check_for_collision_with_list(self.ball, self.bunker_list) and self.ball.change_x ==0 and self.ball.change_y == 0:
             if self.didweohno == 0:
-                arcade.play_sound(self.ohno)
+                arcade.play_sound(self.ugly)
                 self.didweohno = 1
             self.bunker_multiplier = 0.1
         else:
@@ -229,6 +237,7 @@ class holeView(arcade.View):
         #check if ball lands in water, reset and penalty
         if arcade.check_for_collision(self.ball, self.water_hazard) and self.ball.change_x ==0 and self.ball.change_y == 0:
             arcade.play_sound(self.splash)
+            arcade.play_sound(self.f)
             self.ball.center_x = (self.water_hazard.left - 10)
             self.n_hits += 1
             self.score += 1 #add one hit to total score
@@ -351,6 +360,9 @@ class instuctionsView(arcade.View):
         arcade.draw_text("up arrow = up   down arrow = down   -> = right   <- = left", start_x, start_y, font_size=12, width = width, align="center", multiline=True)
         start_y -= lineHeight        
         arcade.draw_text("space bar = swing (hold down to increase swing power)", start_x, start_y, font_size=12, width = width, align="center", multiline=True)
+        start_y -= lineHeight        
+        arcade.draw_text("B = Drink a cold one", start_x, start_y, font_size=12, width = width, align="center", multiline=True)
+        
     
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.ENTER:
