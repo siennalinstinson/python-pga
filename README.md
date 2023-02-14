@@ -1,7 +1,7 @@
 # ReadMe
 ## Happy valentines day! <3   
 
-### repo python-pga Instructions:  
+### Repo python-pga instructions:  
 Increase your permissions using powershell:  
 • Run this in windows powershell:  Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
   
